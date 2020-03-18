@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-// import PropTypes from 'prop-types'
+
 import style from "./styles.module.css";
 import Searchbar from "../searchbar/Searchbar";
 import ImageGallery from "../imageGallery/ImageGallery";
-import Loader from "react-loader-spinner";
-import Button from "../button/Button";
 import Modal from "../modal/Modal";
+
 const axios = require("axios");
 
 const mapper = response =>
@@ -25,6 +24,7 @@ export default class App extends Component {
     page: 1,
     isLoading: false
   };
+
   request = () =>
     axios
       .get(
@@ -52,6 +52,7 @@ export default class App extends Component {
         page: state.page + NEXT_PAGE_STEP
       }));
   };
+
   componentDidUpdate(prevProps, prevState) {
     if (
       prevState.search !== this.state.search ||
@@ -61,11 +62,11 @@ export default class App extends Component {
       this.request();
     }
   }
-  componentDidMount() {}
-  handleSubmit = ev => {
-    ev.target.value !== this.state.search &&
+  handleSubmit = tag => {
+    tag &&
+      tag !== this.state.search &&
       this.setState({
-        search: ev.target.value,
+        search: tag,
         pictures: [],
         modalWindowPicture: [],
         page: 1,
@@ -79,23 +80,12 @@ export default class App extends Component {
         {this.state.pictures.length !== 0 && (
           <ImageGallery
             picturesList={this.state.pictures}
+            onNextPictures={this.handleNextPictures}
             modalView={this.openModalWindow}
+            loader={this.state.isLoading}
           ></ImageGallery>
         )}
-        {this.state.isLoading ? (
-          <Loader
-            className={style.loaderStyles}
-            type="Puff"
-            color="#00BFFF"
-            height={100}
-            width={100}
-            timeout={3000}
-          ></Loader>
-        ) : (
-          this.state.pictures.length !== 0 && (
-            <Button onNextPictures={this.handleNextPictures}></Button>
-          )
-        )}
+
         <Modal
           onClose={this.handleClose}
           picture={this.state.modalWindowPicture}

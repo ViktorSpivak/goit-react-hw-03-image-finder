@@ -5,18 +5,25 @@ export class Searchbar extends Component {
   state = {
     tag: ""
   };
-  handleChange = ev => this.setState({ [ev.target.name]: ev.target.value });
+
+  handleChange = ev => {
+    this.setState({ [ev.target.name]: ev.target.value });
+
+    (ev.keyCode === 13 || ev.target.name === "find") &&
+      this.props.onSubmit(this.state.tag);
+  };
   render() {
     const { tag } = this.state;
     return (
-      <header className={style.Searchbar}>
+      <div className={style.Searchbar}>
         <form className={style.SearchForm} form="search">
           <button
+            name="find"
             form="search"
             type="submit"
             value={this.state.tag}
             className={style.SearchForm_button}
-            onClick={this.props.onSubmit}
+            onClick={this.handleChange}
           >
             <span className={style.SearchForm_button_label}></span>
           </button>
@@ -26,7 +33,7 @@ export class Searchbar extends Component {
             value={tag}
             name="tag"
             onChange={this.handleChange}
-            // on={this.props.onSubmit}
+            onKeyDown={this.handleChange}
             className={style.SearchForm_input}
             type="text"
             autoComplete="off"
@@ -34,7 +41,7 @@ export class Searchbar extends Component {
             placeholder="Search images and photos"
           />
         </form>
-      </header>
+      </div>
     );
   }
 }

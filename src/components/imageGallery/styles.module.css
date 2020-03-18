@@ -1,9 +1,11 @@
 /*
    * Стили компонента ImageGallery
    */
+.forLoader {
+  text-align: center;
+}
+
 .ImageGallery {
-  max-height: 80vh;
-  overflow: auto;
   display: grid;
   max-width: calc(100vw - 48px);
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));

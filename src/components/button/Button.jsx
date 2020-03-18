@@ -2,7 +2,7 @@ import React from "react";
 import style from "./styles.module.css";
 const Button = ({ onNextPictures }) => {
   return (
-    <footer>
+    <div>
       <button
         className={style.Button}
         type="button"
@@ -11,7 +11,7 @@ const Button = ({ onNextPictures }) => {
       >
         Load more
       </button>
-    </footer>
+    </div>
   );
 };
 export default Button;

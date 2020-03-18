@@ -35,23 +35,3 @@ img {
   grid-gap: 16px;
   padding-bottom: 24px;
 }
-.loaderStyles {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-.loaderStyles::before {
-  position: absolute;
-  top: -50vh;
-  left: -100vh;
-  right: -100vh;
-  bottom: -44vh;
-  content: "";
-  /* width: 100vh;
-  height: 80vh; */
-  background-color: cadetblue;
-  opacity: 50%;
-
-  /* margin: auto auto; */
-}
